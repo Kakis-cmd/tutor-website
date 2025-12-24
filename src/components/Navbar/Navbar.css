@@ -1,0 +1,89 @@
+﻿/* Replace everything in src/components/Navbar/Navbar.css with: */
+
+.navbar {
+  background: white;
+  padding: 15px 30px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  display: flex;                    /* Makes children horizontal */
+  justify-content: space-between;   /* Logo left, links right */
+  align-items: center;              /* Vertically center everything */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo h2 {
+  color: #2563eb;
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.tagline {
+  color: #64748b;
+  font-size: 0.9rem;
+  margin: 5px 0 0;
+  display: block;
+}
+
+.nav-links {
+  display: flex;                    /* Links sit side-by-side */
+  gap: 25px;                        /* Space between links */
+  align-items: center;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #4b5563;
+  font-weight: 500;
+  padding: 8px 0;
+  position: relative;
+  transition: color 0.3s;
+}
+
+.nav-link:hover {
+  color: #2563eb;
+}
+
+.nav-button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-left: 10px;
+  transition: background 0.3s;
+}
+
+.nav-button:hover {
+  background: #1d4ed8;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+  
+  .nav-links {
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+  }
+  
+  .nav-link {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  
+  .nav-button {
+    margin-left: 0;
+    margin-top: 10px;
+    width: 100%;
+  }
+}
