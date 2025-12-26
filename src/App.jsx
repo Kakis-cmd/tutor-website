@@ -3,7 +3,10 @@ import Navbar from './components/Navbar/Navbar.jsx';
 import Hero from './components/Hero/Hero.jsx';
 import Services from './components/Services/Services.jsx';
 import About from './components/About/About.jsx';
-import Contact from './components/Contact/Contact.jsx';  // Add this import
+import Testimonials from './components/Testimonials/Testimonials.jsx';
+import Booking from './components/Booking/Booking.jsx';
+import Blog from './components/Blog/Blog.jsx';  // Add this
+import Contact from './components/Contact/Contact.jsx';
 
 function App() {
   return (
@@ -12,7 +15,10 @@ function App() {
       <Hero />
       <Services />
       <About />
-      <Contact />  {/* Add this line */}
+      <Testimonials />
+      <Booking />
+      <Blog />  {/* Add this line */}
+      <Contact />
       
       <footer className="footer">
         <div className="footer-content">

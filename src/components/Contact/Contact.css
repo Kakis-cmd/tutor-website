@@ -133,7 +133,7 @@
   padding-left: 30px;
 }
 
-/* Contact Form */
+/* Contact Form - FIXED TEXT VISIBILITY */
 .contact-form-section {
   background: white;
   padding: 40px;
@@ -154,6 +154,7 @@
   font-size: 0.95rem;
 }
 
+/* FIXED: Text now visible in form fields */
 .form-group input,
 .form-group select,
 .form-group textarea {
@@ -165,6 +166,31 @@
   font-family: inherit;
   transition: all 0.3s;
   background: white;
+  color: #1e293b; /* TEXT IS NOW VISIBLE */
+}
+
+/* Placeholder text */
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #94a3b8;
+  opacity: 1;
+}
+
+/* Dropdown text */
+.form-group select {
+  color: #1e293b;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 20px;
+  padding-right: 45px;
+}
+
+/* Dropdown options */
+.form-group select option {
+  color: #1e293b;
+  background: white;
 }
 
 .form-group input:focus,
@@ -173,15 +199,7 @@
   outline: none;
   border-color: #2563eb;
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-}
-
-.form-group select {
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 15px center;
-  background-size: 20px;
-  padding-right: 45px;
+  color: #1e293b;
 }
 
 .form-group textarea {
@@ -227,6 +245,7 @@
   cursor: not-allowed;
 }
 
+/* Spinner */
 .spinner {
   width: 20px;
   height: 20px;
@@ -240,8 +259,20 @@
   to { transform: rotate(360deg); }
 }
 
+/* Success and Error Messages */
 .success-message {
   background: #10b981;
+  color: white;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 20px;
+  text-align: center;
+  font-weight: 600;
+  animation: slideIn 0.3s ease;
+}
+
+.error-message {
+  background: #ef4444;
   color: white;
   padding: 15px;
   border-radius: 8px;
@@ -279,51 +310,4 @@
   .info-card {
     padding: 20px;
   }
-  
-
-.error-message {
-  background: #ef4444;
-  color: white;
-  padding: 15px;
-  border-radius: 8px;
-  margin-top: 20px;
-  text-align: center;
-  font-weight: 600;
-  animation: slideIn 0.3s ease;
-}
-
-.success-message {
-  background: #10b981;
-  color: white;
-  padding: 15px;
-  border-radius: 8px;
-  margin-top: 20px;
-  text-align: center;
-  font-weight: 600;
-  animation: slideIn 0.3s ease;
-}
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.spinner {
-  width: 20px;
-  height: 20px;
-  border: 3px solid rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
-  border-top-color: white;
-  animation: spin 1s ease-in-out infinite;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
 }
