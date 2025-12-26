@@ -1,11 +1,8 @@
-// Open src/components/Hero/Hero.jsx
-// Replace with:
-
 import './Hero.css';
 
 function Hero() {
   return (
-    <section className="hero">
+    <section className="hero" id="home">
       <div className="hero-content">
         <div className="hero-text">
           <h1 className="hero-title">

@@ -11,36 +11,20 @@
 .about-header {
   text-align: center;
   margin-bottom: 60px;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .about-title {
   font-size: 2.5rem;
   color: #1e293b;
   margin-bottom: 20px;
-  position: relative;
-  display: inline-block;
-}
-
-.about-title::after {
-  content: '';
-  position: absolute;
-  width: 80px;
-  height: 4px;
-  background: linear-gradient(90deg, #2563eb, #3b82f6);
-  bottom: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  border-radius: 2px;
 }
 
 .about-subtitle {
   font-size: 1.1rem;
   color: #64748b;
   line-height: 1.6;
-  margin-top: 30px;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .about-content {
@@ -60,16 +44,8 @@
   font-size: 1.5rem;
   color: #1e293b;
   margin-bottom: 25px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
 }
 
-.title-icon {
-  font-size: 1.8rem;
-}
-
-/* Qualifications Section */
 .qualifications-grid {
   display: flex;
   flex-direction: column;
@@ -84,12 +60,6 @@
   background: #f8fafc;
   border-radius: 12px;
   border-left: 4px solid #2563eb;
-  transition: transform 0.3s;
-}
-
-.qualification-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 .qual-icon {
@@ -132,10 +102,9 @@
   font-size: 0.95rem;
 }
 
-/* Experience Stats */
 .experience-stats {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   background: linear-gradient(135deg, #2563eb, #3b82f6);
   padding: 30px;
@@ -158,93 +127,10 @@
   opacity: 0.9;
 }
 
-/* Philosophy Section */
-.philosophy-card,
-.expertise-card,
 .personal-note {
-  background: #f8fafc;
+  background: #f0f9ff;
   padding: 30px;
   border-radius: 12px;
-  margin-bottom: 30px;
-}
-
-.philosophy-list {
-  list-style: none;
-  padding: 0;
-}
-
-.philosophy-point {
-  display: flex;
-  align-items: flex-start;
-  gap: 15px;
-  margin-bottom: 15px;
-  color: #475569;
-  line-height: 1.6;
-}
-
-.check-icon {
-  color: #10B981;
-  font-weight: bold;
-  flex-shrink: 0;
-  margin-top: 3px;
-}
-
-/* Expertise Grid */
-.expertise-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-}
-
-@media (max-width: 768px) {
-  .expertise-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-.expertise-item {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  padding: 15px;
-  background: white;
-  border-radius: 8px;
-  transition: transform 0.3s;
-}
-
-.expertise-item:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.expertise-icon {
-  font-size: 1.8rem;
-  flex-shrink: 0;
-}
-
-.expertise-details h4 {
-  color: #1e293b;
-  margin-bottom: 5px;
-  font-size: 1rem;
-}
-
-.expertise-level {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.85rem;
-  color: #64748b;
-}
-
-.level-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-}
-
-/* Personal Note */
-.personal-note {
-  background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
   border: 1px solid #bae6fd;
 }
 
@@ -260,14 +146,12 @@
   color: #2563eb;
 }
 
-/* Call to Action */
 .about-cta {
   text-align: center;
   padding: 50px;
   background: linear-gradient(135deg, #1e293b, #334155);
   color: white;
   border-radius: 12px;
-  margin-top: 40px;
 }
 
 .about-cta h3 {
@@ -281,44 +165,22 @@
   font-size: 1.1rem;
 }
 
-.cta-buttons {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.btn-primary, .btn-outline {
+.btn-primary {
+  background: #3b82f6;
+  color: white;
+  border: none;
   padding: 15px 35px;
   border-radius: 8px;
   font-weight: 600;
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s;
-  border: none;
-}
-
-.btn-primary {
-  background: #3b82f6;
-  color: white;
 }
 
 .btn-primary:hover {
   background: #2563eb;
   transform: translateY(-2px);
   box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
-}
-
-.btn-outline {
-  background: transparent;
-  color: white;
-  border: 2px solid white;
-}
-
-.btn-outline:hover {
-  background: white;
-  color: #1e293b;
-  transform: translateY(-2px);
 }
 
 /* Responsive Design */
@@ -333,6 +195,7 @@
   
   .experience-stats {
     grid-template-columns: 1fr;
+    gap: 20px;
   }
   
   .qualification-card {
@@ -343,12 +206,15 @@
     flex-direction: column;
   }
   
-  .cta-buttons {
-    flex-direction: column;
-    align-items: center;
+  .about-cta {
+    padding: 30px 20px;
   }
   
-  .btn-primary, .btn-outline {
+  .about-cta h3 {
+    font-size: 1.5rem;
+  }
+  
+  .btn-primary {
     width: 100%;
     max-width: 300px;
   }

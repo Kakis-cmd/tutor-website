@@ -1,5 +1,3 @@
-/* Replace everything in src/components/Hero/Hero.css with: */
-
 .hero {
   background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
   padding: 120px 20px;
@@ -16,7 +14,7 @@
 
 .hero-text {
   max-width: 800px;
-  text-align: left;  /* Changed from center */
+  text-align: left;
 }
 
 .hero-title {

@@ -1,7 +1,4 @@
-﻿// Open src/components/Navbar/Navbar.jsx
-// Replace with this code:
-
-import './Navbar.css';
+﻿import './Navbar.css';
 
 function Navbar() {
   return (
@@ -12,8 +9,8 @@ function Navbar() {
       </div>
       <div className="nav-links">
         <a href="#home" className="nav-link">Home</a>
-        <a href="#about" className="nav-link">About</a>
         <a href="#services" className="nav-link">Services</a>
+        <a href="#about" className="nav-link">About</a>
         <a href="#contact" className="nav-link">Contact</a>
         <button className="nav-button">Book Session</button>
       </div>
