@@ -1,8 +1,7 @@
-// Update src/App.jsx
-import './App.css';
-import Navbar from './components/Navbar/Navbar.jsx';
-import Hero from './components/Hero/Hero.jsx';
 
+import './App.css';
+import Navbar from './components/Navbar/Navbar.js';
+import Hero from './components/Hero/Hero.jsx';  
 function App() {
   return (
     <div className="App">
