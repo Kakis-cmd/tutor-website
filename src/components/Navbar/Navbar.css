@@ -106,4 +106,35 @@
   .tagline {
     font-size: 0.8rem;
   }
+  /* Add to existing Navbar.css */
+
+/* Logo hover effect */
+.logo:hover {
+  opacity: 0.8;
+}
+
+/* Book Session button animation */
+.nav-button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-left: 10px;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-button:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
+}
+
+.nav-button:active {
+  transform: translateY(0);
+}
 }

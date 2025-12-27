@@ -4,8 +4,7 @@ import Hero from './components/Hero/Hero.jsx';
 import Services from './components/Services/Services.jsx';
 import About from './components/About/About.jsx';
 import Testimonials from './components/Testimonials/Testimonials.jsx';
-import Booking from './components/Booking/Booking.jsx';
-import Blog from './components/Blog/Blog.jsx';  // Add this
+import Blog from './components/Blog/Blog.jsx';  
 import Contact from './components/Contact/Contact.jsx';
 
 function App() {
@@ -16,8 +15,7 @@ function App() {
       <Services />
       <About />
       <Testimonials />
-      <Booking />
-      <Blog />  {/* Add this line */}
+      <Blog /> 
       <Contact />
       
       <footer className="footer">
@@ -30,5 +28,6 @@ function App() {
     </div>
   );
 }
+
 
 export default App;
