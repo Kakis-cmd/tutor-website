@@ -10,104 +10,144 @@ function Services() {
     {
       id: 1,
       title: "Advanced Calculus",
-      description: "Master differentiation, integration, multivariable calculus, and differential equations with expert guidance.",
+      description: "Master complex mathematical concepts including differentiation, integration, multivariable calculus, and differential equations with step-by-step guidance.",
       icon: "∫",
-      level: "University Level",
-      duration: "1-2 hour sessions",
-      price: "$25-$35/hour",
+      level: "University & College Level",
+      duration: "1-2 hour interactive sessions",
       category: "mathematics",
       color: "#3B82F6",
-      features: ["Step-by-step problem solving", "Real-world applications", "Exam preparation", "Custom study plans"]
+      features: [
+        "Step-by-step problem solving approach",
+        "Real-world applications and case studies", 
+        "Comprehensive exam preparation strategies",
+        "Customized study plans based on your syllabus"
+      ],
+      learnContent: "Gain a deep understanding of mathematical modeling, optimization problems, and analytical thinking that extends beyond the classroom into real-world applications."
     },
     {
       id: 2,
       title: "Statistics & Probability",
-      description: "Understand descriptive statistics, hypothesis testing, regression analysis, and probability distributions.",
+      description: "Comprehensive understanding of statistical methods, data analysis techniques, probability theory, and research methodology.",
       icon: "📊",
-      level: "High School to University",
-      duration: "1-2 hour sessions",
-      price: "$25-$30/hour",
+      level: "High School to PhD Level",
+      duration: "1-2 hour data-driven sessions",
       category: "mathematics",
       color: "#10B981",
-      features: ["SPSS/R/Python guidance", "Research methodology", "Data interpretation", "Statistical modeling"]
+      features: [
+        "Practical data analysis with SPSS/R/Python",
+        "Research methodology and experimental design",
+        "Statistical inference and hypothesis testing",
+        "Data visualization and interpretation"
+      ],
+      learnContent: "Develop the ability to analyze complex datasets, make data-driven decisions, and understand the mathematical foundations behind statistical reasoning."
     },
     {
       id: 3,
       title: "Linear Algebra",
-      description: "Learn vectors, matrices, eigenvalues, eigenvectors, and linear transformations with practical examples.",
+      description: "Master matrix operations, vector spaces, eigenvalues, eigenvectors, and their applications in computer science and engineering.",
       icon: "⎡⎣⎤⎦",
-      level: "University Level",
-      duration: "1-2 hour sessions",
-      price: "$25-$35/hour",
+      level: "University & Graduate Level",
+      duration: "1-2 hour concept-focused sessions",
       category: "mathematics",
       color: "#8B5CF6",
-      features: ["Matrix operations", "Vector spaces", "Applications in AI", "Geometric interpretations"]
+      features: [
+        "Matrix operations and transformations",
+        "Vector spaces and linear independence",
+        "Applications in AI and machine learning",
+        "Geometric interpretations of algebraic concepts"
+      ],
+      learnContent: "Understand the language of linear transformations that powers modern computing, graphics, and artificial intelligence systems."
     },
     {
       id: 4,
       title: "High School Mathematics",
-      description: "Comprehensive support for algebra, geometry, trigonometry, and pre-calculus curriculum.",
+      description: "Build strong foundations in algebra, geometry, trigonometry, and pre-calculus with curriculum-aligned instruction.",
       icon: "📐",
       level: "Grades 8-12",
-      duration: "1-hour sessions",
-      price: "$20-$25/hour",
+      duration: "1-hour structured sessions",
       category: "mathematics",
       color: "#F59E0B",
-      features: ["Curriculum alignment", "Exam strategies", "Concept building", "Homework help"]
+      features: [
+        "Complete curriculum alignment",
+        "Exam preparation and strategy building",
+        "Concept reinforcement through practice",
+        "Homework and assignment assistance"
+      ],
+      learnContent: "Develop mathematical confidence and problem-solving skills that prepare you for university-level mathematics and real-world applications."
     },
     
     // Writing & Research Services
     {
       id: 5,
-      title: "Master's Thesis Writing",
-      description: "Complete assistance with Master's thesis from proposal to final submission and defense preparation.",
+      title: "Thesis & Research Writing",
+      description: "Expert guidance through the entire research process from proposal development to final thesis submission and defense preparation.",
       icon: "🎓",
-      level: "Master's Level",
-      duration: "Custom packages",
-      price: "$30-$50/page",
+      level: "Bachelor's to PhD Level",
+      duration: "Flexible project-based sessions",
       category: "writing",
       color: "#EC4899",
-      features: ["Literature review", "Methodology design", "Data analysis", "Formatting & citations"]
+      features: [
+        "Literature review and gap analysis",
+        "Research methodology design",
+        "Statistical analysis and interpretation",
+        "Academic writing and citation formatting"
+      ],
+      learnContent: "Master the art of academic writing, research design, and scholarly communication while developing a compelling research narrative."
     },
     {
       id: 6,
-      title: "Research Paper Assistance",
-      description: "Professional help with academic papers for journals, conferences, and publications.",
+      title: "Academic Paper Development",
+      description: "Professional assistance with research papers, journal articles, conference submissions, and academic publications.",
       icon: "📝",
-      level: "Undergrad to PhD",
-      duration: "Per paper basis",
-      price: "$25-$40/page",
+      level: "Undergraduate to Professional",
+      duration: "Custom project timelines",
       category: "writing",
       color: "#06B6D4",
-      features: ["APA/MLA formatting", "Peer-review preparation", "Statistical analysis", "Editing & proofreading"]
+      features: [
+        "APA/MLA/Chicago formatting expertise",
+        "Peer-review preparation and response",
+        "Statistical analysis guidance",
+        "Professional editing and proofreading"
+      ],
+      learnContent: "Learn to communicate complex ideas clearly, structure arguments logically, and contribute meaningfully to academic discourse."
     },
     
     // Civic Education
     {
       id: 7,
       title: "Civic Education",
-      description: "Comprehensive understanding of government systems, citizenship, rights, and civic responsibilities.",
+      description: "Comprehensive understanding of government systems, constitutional law, citizenship rights, and civic responsibilities.",
       icon: "🏛️",
-      level: "All Levels",
-      duration: "1-2 hour sessions",
-      price: "$20-$30/hour",
+      level: "All Educational Levels",
+      duration: "1-2 hour engaging sessions",
       category: "civics",
       color: "#EF4444",
-      features: ["Government structures", "Citizen rights", "Constitutional law", "Social studies"]
+      features: [
+        "Government structures and functions",
+        "Constitutional rights and responsibilities",
+        "Political systems and processes",
+        "Critical thinking about social issues"
+      ],
+      learnContent: "Develop informed citizenship, understand democratic processes, and engage meaningfully with societal structures and civic duties."
     },
     
     // Exam Preparation
     {
       id: 8,
-      title: "Exam & Test Preparation",
-      description: "Strategic preparation for final exams, standardized tests, and university entrance exams.",
+      title: "Exam Preparation",
+      description: "Strategic preparation for university entrance exams, standardized tests, finals, and comprehensive assessments.",
       icon: "🎯",
-      level: "All Levels",
-      duration: "Custom packages",
-      price: "$25-$40/hour",
+      level: "All Academic Levels",
+      duration: "Custom preparation packages",
       category: "preparation",
       color: "#6366F1",
-      features: ["Past paper practice", "Time management", "Stress reduction", "Test-taking strategies"]
+      features: [
+        "Past paper analysis and practice",
+        "Time management strategies",
+        "Stress reduction techniques",
+        "Exam-taking skills development"
+      ],
+      learnContent: "Build test-taking confidence, improve performance under pressure, and develop strategies for academic success across all subjects."
     }
   ];
 
@@ -123,23 +163,37 @@ function Services() {
     ? services 
     : services.filter(service => service.category === activeFilter);
 
-  // Stats for the header
-  const serviceStats = [
-    { number: services.length, label: 'Services Offered' },
-    { number: '8+', label: 'Years Experience' },
-    { number: '200+', label: 'Students Helped' },
-    { number: '95%', label: 'Success Rate' }
-  ];
+  const handleBookSession = () => {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  // Auto-rotate featured services
+  const [featuredIndex, setFeaturedIndex] = useState(0);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setFeaturedIndex((prev) => (prev + 1) % Math.min(4, filteredServices.length));
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [filteredServices.length]);
 
   return (
     <section className="services" id="services">
       {/* Animated Background Elements */}
       <div className="services-background">
-        <div className="math-symbol math-1">∑</div>
-        <div className="math-symbol math-2">π</div>
-        <div className="math-symbol math-3">∞</div>
-        <div className="civic-symbol civic-1">⚖️</div>
-        <div className="civic-symbol civic-2">🏛️</div>
+        <div className="floating-shape shape-1"></div>
+        <div className="floating-shape shape-2"></div>
+        <div className="floating-shape shape-3"></div>
+        <div className="floating-shape shape-4"></div>
+        <div className="math-symbol">∑</div>
+        <div className="math-symbol">π</div>
+        <div className="math-symbol">∞</div>
+        <div className="math-symbol">∫</div>
+        <div className="writing-symbol">✍️</div>
+        <div className="civic-symbol">⚖️</div>
+        <div className="success-symbol">⭐</div>
       </div>
 
       <div className="container">
@@ -147,46 +201,79 @@ function Services() {
         <div className="services-header">
           <div className="header-badge">
             <span className="badge-icon">✨</span>
-            <span className="badge-text">Expert Academic Support</span>
+            <span className="badge-text">Transformative Academic Support</span>
           </div>
           
           <h2 className="services-title">
-            Transform Your 
-            <span className="title-highlight"> Academic Journey</span>
+            Master Your Subjects with
+            <span className="title-highlight"> Personalized Guidance</span>
           </h2>
           
           <p className="services-subtitle">
-            Comprehensive tutoring and academic support tailored to your specific learning needs. 
-            From mathematics mastery to civic education and research writing.
+            Expert-led tutoring designed to build confidence, enhance understanding, and achieve academic excellence. 
+            Each session is tailored to your unique learning style and goals.
           </p>
           
           {/* Quick Stats */}
           <div className="services-stats">
-            {serviceStats.map((stat, index) => (
-              <div className="stat-item" key={index}>
-                <div className="stat-number">{stat.number}</div>
-                <div className="stat-label">{stat.label}</div>
-              </div>
+            <div className="stat-item">
+              <div className="stat-icon">🎯</div>
+              <div className="stat-number">95%</div>
+              <div className="stat-label">Success Rate</div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-icon">⏰</div>
+              <div className="stat-number">8+</div>
+              <div className="stat-label">Years Experience</div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-icon">👥</div>
+              <div className="stat-number">200+</div>
+              <div className="stat-label">Students Transformed</div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-icon">⭐</div>
+              <div className="stat-number">4.9</div>
+              <div className="stat-label">Average Rating</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Featured Service Highlight */}
+        <div className="featured-service">
+          <div className="featured-content">
+            <div className="featured-icon" style={{ color: filteredServices[featuredIndex]?.color }}>
+              {filteredServices[featuredIndex]?.icon}
+            </div>
+            <h3>Currently Highlighting: {filteredServices[featuredIndex]?.title}</h3>
+            <p>{filteredServices[featuredIndex]?.learnContent}</p>
+          </div>
+          <div className="featured-dots">
+            {filteredServices.slice(0, 4).map((_, index) => (
+              <button
+                key={index}
+                className={`featured-dot ${index === featuredIndex ? 'active' : ''}`}
+                onClick={() => setFeaturedIndex(index)}
+                style={{ backgroundColor: index === featuredIndex ? filteredServices[index]?.color : '#e2e8f0' }}
+              />
             ))}
           </div>
         </div>
 
         {/* Category Filters */}
         <div className="services-filters">
-          {categories.map(category => (
-            <button
-              key={category.id}
-              className={`filter-btn ${activeFilter === category.id ? 'active' : ''}`}
-              onClick={() => setActiveFilter(category.id)}
-              style={{
-                backgroundColor: activeFilter === category.id ? 
-                  services.find(s => s.category === category.id)?.color || '#2563eb' : 'transparent'
-              }}
-            >
-              {category.name}
-              <span className="filter-count">({category.count})</span>
-            </button>
-          ))}
+          <div className="filters-container">
+            {categories.map(category => (
+              <button
+                key={category.id}
+                className={`filter-btn ${activeFilter === category.id ? 'active' : ''}`}
+                onClick={() => setActiveFilter(category.id)}
+              >
+                <span className="filter-name">{category.name}</span>
+                <span className="filter-count">{category.count}</span>
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Services Grid */}
@@ -198,23 +285,24 @@ function Services() {
               onMouseEnter={() => setHoveredService(service.id)}
               onMouseLeave={() => setHoveredService(null)}
               style={{
-                transform: hoveredService === service.id ? 'translateY(-10px)' : 'translateY(0)',
-                borderColor: hoveredService === service.id ? service.color : '#e2e8f0',
-                boxShadow: hoveredService === service.id ? 
-                  `0 20px 40px ${service.color}30` : '0 10px 30px rgba(0, 0, 0, 0.1)'
+                '--service-color': service.color,
+                '--service-bg': `${service.color}15`
               }}
+              data-hovered={hoveredService === service.id}
             >
               {/* Service Header */}
               <div className="service-header">
-                <div 
-                  className="service-icon"
-                  style={{ 
-                    backgroundColor: `${service.color}20`,
-                    color: service.color,
-                    transform: hoveredService === service.id ? 'scale(1.1)' : 'scale(1)'
-                  }}
-                >
-                  {service.icon}
+                <div className="service-icon-wrapper">
+                  <div 
+                    className="service-icon"
+                    style={{ 
+                      backgroundColor: `${service.color}20`,
+                      color: service.color
+                    }}
+                  >
+                    {service.icon}
+                  </div>
+                  <span className="service-level">{service.level}</span>
                 </div>
                 <div className="service-category" style={{ color: service.color }}>
                   {service.category.charAt(0).toUpperCase() + service.category.slice(1)}
@@ -226,7 +314,16 @@ function Services() {
                 <h3 className="service-title">{service.title}</h3>
                 <p className="service-description">{service.description}</p>
                 
-                {/* Service Features - FIXED: Now showing actual features */}
+                {/* What You'll Learn Section */}
+                <div className="learn-section">
+                  <h4 className="learn-title">
+                    <span className="learn-icon">🧠</span>
+                    What You'll Master
+                  </h4>
+                  <p className="learn-content">{service.learnContent}</p>
+                </div>
+                
+                {/* Service Features */}
                 <div className="service-features">
                   {service.features.map((feature, index) => (
                     <div className="feature-item" key={index}>
@@ -239,18 +336,18 @@ function Services() {
                 {/* Service Details */}
                 <div className="service-details">
                   <div className="detail-item">
-                    <span className="detail-label">Level:</span>
-                    <span className="detail-value">{service.level}</span>
+                    <span className="detail-icon">⏱️</span>
+                    <div className="detail-content">
+                      <span className="detail-label">Session Duration</span>
+                      <span className="detail-value">{service.duration}</span>
+                    </div>
                   </div>
                   <div className="detail-item">
-                    <span className="detail-label">Duration:</span>
-                    <span className="detail-value">{service.duration}</span>
-                  </div>
-                  <div className="detail-item">
-                    <span className="detail-label">Price:</span>
-                    <span className="detail-value price" style={{ color: service.color }}>
-                      {service.price}
-                    </span>
+                    <span className="detail-icon">🎯</span>
+                    <div className="detail-content">
+                      <span className="detail-label">Learning Outcome</span>
+                      <span className="detail-value">Concept Mastery</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -259,68 +356,40 @@ function Services() {
               <div className="service-footer">
                 <button 
                   className="service-button"
+                  onClick={handleBookSession}
                   style={{ backgroundColor: service.color }}
                 >
-                  Learn More
-                </button>
-                <button 
-                  className="service-button-outline"
-                  style={{ borderColor: service.color, color: service.color }}
-                >
-                  Book Now
+                  <span className="button-icon">📅</span>
+                  Book This Session
                 </button>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Pricing Comparison - REMOVED FREE SESSION */}
-        <div className="pricing-comparison">
-          <h3 className="section-title">Flexible Pricing Options</h3>
-          <div className="pricing-cards">
-            <div className="pricing-card basic">
-              <div className="pricing-header">
-                <h4>Single Session</h4>
-                <div className="price">$25<span>/hour</span></div>
-              </div>
-              <ul className="pricing-features">
-                <li>✓ One-on-one personalized tutoring</li>
-                <li>✓ Customized lesson plan</li>
-                <li>✓ Session recording available</li>
-                <li>✓ Homework help included</li>
-              </ul>
-              <button className="pricing-button">Book Single Session</button>
+        {/* Learning Approach Section */}
+        <div className="learning-approach">
+          <h3 className="section-title">Our Learning Methodology</h3>
+          <div className="approach-grid">
+            <div className="approach-card">
+              <div className="approach-icon">🎯</div>
+              <h4>Personalized Learning</h4>
+              <p>Customized lesson plans based on your learning style, pace, and academic goals</p>
             </div>
-            
-            <div className="pricing-card popular">
-              <div className="popular-badge">Most Popular</div>
-              <div className="pricing-header">
-                <h4>Package (5 Sessions)</h4>
-                <div className="price">$110<span>Save 12%</span></div>
-              </div>
-              <ul className="pricing-features">
-                <li>✓ Everything in Basic</li>
-                <li>✓ Progress tracking dashboard</li>
-                <li>✓ Priority scheduling</li>
-                <li>✓ Free study materials</li>
-                <li>✓ Monthly progress report</li>
-              </ul>
-              <button className="pricing-button primary">Get Package</button>
+            <div className="approach-card">
+              <div className="approach-icon">🔄</div>
+              <h4>Interactive Sessions</h4>
+              <p>Engaging discussions, real-time problem-solving, and continuous feedback</p>
             </div>
-            
-            <div className="pricing-card premium">
-              <div className="pricing-header">
-                <h4>Monthly Plan</h4>
-                <div className="price">$400<span>/month</span></div>
-              </div>
-              <ul className="pricing-features">
-                <li>✓ Everything in Package</li>
-                <li>✓ Unlimited email support</li>
-                <li>✓ Weekly progress reviews</li>
-                <li>✓ Customized study schedule</li>
-                <li>✓ Exam prep priority</li>
-              </ul>
-              <button className="pricing-button">Choose Monthly</button>
+            <div className="approach-card">
+              <div className="approach-icon">📊</div>
+              <h4>Progress Tracking</h4>
+              <p>Regular assessments and progress reports to measure improvement</p>
+            </div>
+            <div className="approach-card">
+              <div className="approach-icon">💡</div>
+              <h4>Concept Building</h4>
+              <p>Focus on understanding fundamental concepts rather than memorization</p>
             </div>
           </div>
         </div>
@@ -330,34 +399,64 @@ function Services() {
           <div className="guarantee-content">
             <div className="guarantee-icon">🏆</div>
             <div className="guarantee-text">
-              <h3>100% Satisfaction Guarantee</h3>
-              <p>If you're not completely satisfied with your first session, you'll get a full refund. No questions asked.</p>
+              <h3>First Session Confidence Guarantee</h3>
+              <p>Experience our teaching approach risk-free. If you're not completely satisfied with your first session, it's completely free.</p>
             </div>
-            <button className="guarantee-button">
-              Book Risk-Free Session
+            <button className="guarantee-button" onClick={handleBookSession}>
+              Start Your Journey
             </button>
           </div>
         </div>
 
         {/* FAQ Preview */}
         <div className="faq-preview">
-          <h3 className="section-title">Frequently Asked Questions</h3>
+          <h3 className="section-title">Common Questions</h3>
           <div className="faq-grid">
             <div className="faq-item">
-              <h4>How do online sessions work?</h4>
-              <p>We use Zoom/Google Meet with interactive whiteboard, screen sharing, and session recording.</p>
+              <div className="faq-icon">❓</div>
+              <div className="faq-content">
+                <h4>How are sessions conducted?</h4>
+                <p>We use interactive platforms with digital whiteboards, screen sharing, and session recording for review.</p>
+              </div>
             </div>
             <div className="faq-item">
-              <h4>What materials do I need?</h4>
-              <p>Just a computer with internet. All study materials and resources are provided digitally.</p>
+              <div className="faq-icon">📚</div>
+              <div className="faq-content">
+                <h4>Are materials provided?</h4>
+                <p>Yes, all necessary study materials, practice problems, and resources are included at no extra cost.</p>
+              </div>
             </div>
             <div className="faq-item">
-              <h4>Can I reschedule sessions?</h4>
-              <p>Yes! Flexible rescheduling with 24-hour notice. We understand students' busy schedules.</p>
+              <div className="faq-icon">🔄</div>
+              <div className="faq-content">
+                <h4>Can I change subjects?</h4>
+                <p>Absolutely! You can switch between subjects or combine multiple based on your learning needs.</p>
+              </div>
             </div>
             <div className="faq-item">
-              <h4>Do you offer group sessions?</h4>
-              <p>Yes! Group sessions (2-4 students) are available at discounted rates. Perfect for study groups.</p>
+              <div className="faq-icon">👥</div>
+              <div className="faq-content">
+                <h4>Group sessions available?</h4>
+                <p>Yes, group sessions (2-4 students) offer collaborative learning at reduced rates.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* CTA Section */}
+        <div className="services-cta">
+          <div className="cta-content">
+            <h3>Ready to Transform Your Learning Experience?</h3>
+            <p>Take the first step toward academic excellence with personalized guidance tailored to your goals.</p>
+            <div className="cta-buttons">
+              <button className="cta-btn primary" onClick={handleBookSession}>
+                <span className="btn-icon">🎯</span>
+                Begin Your Journey
+              </button>
+              <a href="#contact" className="cta-btn secondary">
+                <span className="btn-icon">💬</span>
+                Ask Questions
+              </a>
             </div>
           </div>
         </div>
@@ -365,13 +464,5 @@ function Services() {
     </section>
   );
 }
-
-<div className="services-cta">
-  <h3>Ready to Get Started?</h3>
-  <p>All services include personalized attention and flexible scheduling. Book your first session today!</p>
-  <a href="#contact" className="btn-primary">
-    📅 Book Your Session
-  </a>
-</div>
 
 export default Services;

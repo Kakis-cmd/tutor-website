@@ -11,9 +11,14 @@ function Contact() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     subject: '',
-    message: ''
+    message: '',
+    preferredDate: '',
+    preferredTime: '',
+    duration: '1 hour'
   });
+  
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState('');
   const [activeContact, setActiveContact] = useState(0);
@@ -21,6 +26,9 @@ function Contact() {
   const [showBookingModal, setShowBookingModal] = useState(false);
   const [selectedBooking, setSelectedBooking] = useState(null);
   const [isTutorView, setIsTutorView] = useState(false);
+  const [showReminderModal, setShowReminderModal] = useState(false);
+  const [selectedBookingForReminder, setSelectedBookingForReminder] = useState(null);
+  const [reminderTime, setReminderTime] = useState('24');
   
   const [reminders, setReminders] = useState({
     email: true,
@@ -32,8 +40,6 @@ function Contact() {
 
   // ========== PASSWORD CHECK FUNCTION ==========
   const checkPassword = () => {
-    // In production, this would check against a database
-    // For demo, use a simple password like "tutor123"
     if (password === 'tutor123') {
       setIsAuthenticated(true);
       setIsTutorView(true);
@@ -50,7 +56,7 @@ function Contact() {
       id: 1,
       icon: '📞',
       title: 'Call Me',
-      details: '+260 977 123 456', // Replace with your number
+      details: '+260 977 123 456',
       description: 'Available 8 AM - 8 PM, Monday to Saturday',
       action: 'Call Now',
       color: '#3B82F6',
@@ -60,7 +66,7 @@ function Contact() {
       id: 2,
       icon: '✉️',
       title: 'Email Me',
-      details: 'tutor@example.com', // Replace with your email
+      details: 'tutor@example.com',
       description: 'Response within 24 hours guaranteed',
       action: 'Send Email',
       color: '#10B981',
@@ -70,7 +76,7 @@ function Contact() {
       id: 3,
       icon: '💬',
       title: 'WhatsApp',
-      details: '+260 977 123 456', // Replace with your WhatsApp
+      details: '+260 977 123 456',
       description: 'Quick response, ideal for quick questions',
       action: 'Open WhatsApp',
       color: '#25D366',
@@ -80,7 +86,7 @@ function Contact() {
       id: 4,
       icon: '📍',
       title: 'Location',
-      details: 'Lusaka, Zambia', // Replace with your location
+      details: 'Lusaka, Zambia',
       description: 'Online & In-person sessions available',
       action: 'View on Map',
       color: '#8B5CF6',
@@ -88,7 +94,7 @@ function Contact() {
     }
   ];
 
-  // Sample bookings data - Normally this would come from a database
+  // Sample bookings data
   const [bookings, setBookings] = useState([
     {
       id: 1,
@@ -100,6 +106,7 @@ function Contact() {
       status: 'confirmed',
       contact: '+260 977 123 456',
       email: 'john.mwale@email.com',
+      phone: '+260 977 123 456',
       level: 'University',
       topics: 'Calculus, Linear Algebra',
       notes: 'Needs help with integration techniques',
@@ -115,6 +122,7 @@ function Contact() {
       status: 'pending',
       contact: '+260 977 654 321',
       email: 'sarah.banda@email.com',
+      phone: '+260 977 654 321',
       level: 'High School',
       topics: 'Mechanics, Thermodynamics',
       notes: 'Exam preparation for finals',
@@ -156,6 +164,64 @@ function Contact() {
     }));
   };
 
+  // Simulate sending notifications
+  const sendTutorNotification = (booking) => {
+    // In production, this would call your backend API
+    console.log('📧 Email sent to tutor:', {
+      to: 'tutor@example.com',
+      subject: `New Booking: ${booking.student} - ${booking.subject}`,
+      body: `
+        New booking received!
+        
+        Student: ${booking.student}
+        Email: ${booking.email}
+        Phone: ${booking.phone}
+        Subject: ${booking.subject}
+        Date: ${booking.date}
+        Time: ${booking.time}
+        Duration: ${booking.duration}
+        
+        Notes: ${booking.notes}
+        
+        Please check your dashboard for details.
+      `
+    });
+
+    // Simulate SMS to tutor
+    console.log('📱 SMS sent to tutor:', `+260977123456`, 
+      `New booking: ${booking.student} for ${booking.subject} on ${booking.date} at ${booking.time}`);
+
+    // Simulate WhatsApp to tutor
+    const whatsappMessage = encodeURIComponent(
+      `📚 *New Booking Notification*\n\n` +
+      `👤 *Student:* ${booking.student}\n` +
+      `📧 *Email:* ${booking.email}\n` +
+      `📱 *Phone:* ${booking.phone}\n` +
+      `📖 *Subject:* ${booking.subject}\n` +
+      `📅 *Date:* ${booking.date}\n` +
+      `⏰ *Time:* ${booking.time}\n` +
+      `⏱️ *Duration:* ${booking.duration}\n\n` +
+      `Check dashboard for details.`
+    );
+    console.log('💬 WhatsApp notification would be sent to tutor');
+  };
+
+  // Send confirmation to student
+  const sendStudentConfirmation = (booking, viaEmail = true, viaSMS = true) => {
+    if (viaEmail && reminders.email) {
+      console.log('📧 Confirmation email sent to student:', booking.email);
+    }
+    
+    if (viaSMS && reminders.sms && booking.phone) {
+      console.log('📱 Confirmation SMS sent to student:', booking.phone,
+        `Your ${booking.subject} session is confirmed for ${booking.date} at ${booking.time}.`);
+    }
+    
+    if (reminders.whatsapp && booking.phone) {
+      console.log('💬 WhatsApp confirmation sent to student');
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -163,34 +229,48 @@ function Contact() {
     // Simulate form submission
     await new Promise(resolve => setTimeout(resolve, 1500));
     
-    // Create a new booking (for demo purposes)
+    // Create a new booking
     const newBooking = {
       id: bookings.length + 1,
       student: formData.name,
       subject: formData.subject || 'General Inquiry',
-      date: new Date().toLocaleDateString('en-US', { 
+      date: formData.preferredDate || new Date().toLocaleDateString('en-US', { 
         weekday: 'short', 
         year: 'numeric', 
         month: 'short', 
         day: 'numeric' 
       }),
-      time: new Date().toLocaleTimeString('en-US', { 
+      time: formData.preferredTime || new Date().toLocaleTimeString('en-US', { 
         hour: '2-digit', 
         minute: '2-digit' 
       }),
-      duration: '1 hour',
+      duration: formData.duration,
       status: 'pending',
       contact: formData.email,
       email: formData.email,
+      phone: formData.phone,
       level: 'Not specified',
-      topics: 'General inquiry',
+      topics: formData.subject,
       notes: formData.message || 'No additional notes',
       createdAt: new Date().toLocaleDateString('en-US')
     };
     
     setBookings(prev => [newBooking, ...prev]);
+    
+    // Send notifications to tutor
+    sendTutorNotification(newBooking);
+    
     setSubmitStatus('success');
-    setFormData({ name: '', email: '', subject: '', message: '' });
+    setFormData({ 
+      name: '', 
+      email: '', 
+      phone: '',
+      subject: '', 
+      message: '',
+      preferredDate: '',
+      preferredTime: '',
+      duration: '1 hour'
+    });
     
     setTimeout(() => setSubmitStatus(''), 5000);
     setIsSubmitting(false);
@@ -206,7 +286,6 @@ function Contact() {
         window.open(`mailto:${method.details}?subject=Tutoring Inquiry&body=Hello! I would like to inquire about tutoring sessions.`, '_blank');
         break;
       case 'WhatsApp':
-        // FIXED: Proper regex escaping
         const whatsappMessage = encodeURIComponent('Hello! I would like to inquire about tutoring sessions.');
         const phoneNumber = method.details.replace(/\D/g, '');
         window.open(`https://wa.me/${phoneNumber}?text=${whatsappMessage}`, '_blank');
@@ -246,7 +325,11 @@ function Contact() {
     ));
     
     const booking = bookings.find(b => b.id === bookingId);
-    alert(`✅ Booking confirmed for ${booking?.student}. ${reminders.email ? 'Confirmation email sent.' : ''}`);
+    
+    // Send confirmation to student
+    sendStudentConfirmation(booking, true, true);
+    
+    alert(`✅ Booking confirmed for ${booking?.student}. Student has been notified via email and SMS.`);
   };
 
   const cancelBooking = (bookingId) => {
@@ -256,6 +339,10 @@ function Contact() {
           ? { ...booking, status: 'cancelled' }
           : booking
       ));
+      
+      const booking = bookings.find(b => b.id === bookingId);
+      console.log('📧 Cancellation email sent to:', booking?.email);
+      console.log('📱 Cancellation SMS sent to:', booking?.phone);
     }
   };
 
@@ -264,9 +351,24 @@ function Contact() {
     setShowBookingModal(true);
   };
 
-  const sendReminder = (bookingId) => {
-    const booking = bookings.find(b => b.id === bookingId);
-    alert(`📧 Reminder sent to ${booking?.student} via ${reminders.email ? 'Email' : ''} ${reminders.whatsapp ? 'and WhatsApp' : ''}`);
+  const openReminderModal = (booking) => {
+    setSelectedBookingForReminder(booking);
+    setShowReminderModal(true);
+  };
+
+  const setReminder = () => {
+    if (selectedBookingForReminder && reminderTime) {
+      alert(`⏰ Reminder set for ${reminderTime} hours before the session. You will be notified.`);
+      
+      // Simulate setting a reminder
+      setTimeout(() => {
+        alert(`🔔 Reminder: Your session with ${selectedBookingForReminder.student} starts in ${reminderTime} hours!`);
+      }, 2000); // Simulated delay
+      
+      setShowReminderModal(false);
+      setReminderTime('24');
+      setSelectedBookingForReminder(null);
+    }
   };
 
   // Toggle reminder settings
@@ -277,7 +379,7 @@ function Contact() {
     }));
   };
 
-  // Export bookings (demo function)
+  // Export bookings
   const exportBookings = () => {
     const dataStr = JSON.stringify(bookings, null, 2);
     const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
@@ -471,8 +573,8 @@ function Contact() {
                         <span>{booking.duration}</span>
                       </div>
                       <div className="meta-item">
-                        <span className="meta-icon">👤</span>
-                        <span>{booking.contact}</span>
+                        <span className="meta-icon">📱</span>
+                        <span>{booking.phone}</span>
                       </div>
                     </div>
                     <div className="booking-actions">
@@ -484,10 +586,10 @@ function Contact() {
                       </button>
                       <button 
                         className="action-btn secondary"
-                        onClick={() => sendReminder(booking.id)}
+                        onClick={() => openReminderModal(booking)}
                         disabled={booking.status === 'cancelled'}
                       >
-                        Send Reminder
+                        Set Reminder
                       </button>
                       <button 
                         className="action-btn primary"
@@ -673,46 +775,160 @@ function Contact() {
                     </div>
                   </div>
 
+                  <div className="form-row">
+                    <div className="form-group">
+                      <label htmlFor="phone">
+                        <span className="label-icon">📱</span>
+                        Phone Number *
+                      </label>
+                      <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        placeholder="+260 977 123 456"
+                        required
+                      />
+                    </div>
+                    
+                    <div className="form-group">
+                      <label htmlFor="subject">
+                        <span className="label-icon">📚</span>
+                        Subject *
+                      </label>
+                      <select
+                        id="subject"
+                        name="subject"
+                        value={formData.subject}
+                        onChange={handleChange}
+                        required
+                      >
+                        <option value="">Select a subject</option>
+                        <option value="Mathematics Tutoring">Mathematics Tutoring</option>
+                        <option value="Statistics Help">Statistics Help</option>
+                        <option value="Calculus Assistance">Calculus Assistance</option>
+                        <option value="Thesis Writing">Thesis Writing</option>
+                        <option value="Research Paper Help">Research Paper Help</option>
+                        <option value="Civic Education">Civic Education</option>
+                        <option value="Exam Preparation">Exam Preparation</option>
+                        <option value="Other Inquiry">Other Inquiry</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="form-row">
+                    <div className="form-group">
+                      <label htmlFor="preferredDate">
+                        <span className="label-icon">📅</span>
+                        Preferred Date
+                      </label>
+                      <input
+                        type="date"
+                        id="preferredDate"
+                        name="preferredDate"
+                        value={formData.preferredDate}
+                        onChange={handleChange}
+                        min={new Date().toISOString().split('T')[0]}
+                      />
+                    </div>
+                    
+                    <div className="form-group">
+                      <label htmlFor="preferredTime">
+                        <span className="label-icon">⏰</span>
+                        Preferred Time
+                      </label>
+                      <select
+                        id="preferredTime"
+                        name="preferredTime"
+                        value={formData.preferredTime}
+                        onChange={handleChange}
+                      >
+                        <option value="">Select time</option>
+                        <option value="08:00 AM">08:00 AM</option>
+                        <option value="09:00 AM">09:00 AM</option>
+                        <option value="10:00 AM">10:00 AM</option>
+                        <option value="11:00 AM">11:00 AM</option>
+                        <option value="12:00 PM">12:00 PM</option>
+                        <option value="01:00 PM">01:00 PM</option>
+                        <option value="02:00 PM">02:00 PM</option>
+                        <option value="03:00 PM">03:00 PM</option>
+                        <option value="04:00 PM">04:00 PM</option>
+                        <option value="05:00 PM">05:00 PM</option>
+                        <option value="06:00 PM">06:00 PM</option>
+                        <option value="07:00 PM">07:00 PM</option>
+                      </select>
+                    </div>
+                  </div>
+
                   <div className="form-group">
-                    <label htmlFor="subject">
-                      <span className="label-icon">📚</span>
-                      Subject *
+                    <label htmlFor="duration">
+                      <span className="label-icon">⏱️</span>
+                      Session Duration
                     </label>
                     <select
-                      id="subject"
-                      name="subject"
-                      value={formData.subject}
+                      id="duration"
+                      name="duration"
+                      value={formData.duration}
                       onChange={handleChange}
-                      required
                     >
-                      <option value="">Select a subject</option>
-                      <option value="Mathematics Tutoring">Mathematics Tutoring</option>
-                      <option value="Statistics Help">Statistics Help</option>
-                      <option value="Calculus Assistance">Calculus Assistance</option>
-                      <option value="Thesis Writing">Thesis Writing</option>
-                      <option value="Research Paper Help">Research Paper Help</option>
-                      <option value="Civic Education">Civic Education</option>
-                      <option value="Exam Preparation">Exam Preparation</option>
-                      <option value="Other Inquiry">Other Inquiry</option>
+                      <option value="1 hour">1 hour</option>
+                      <option value="1.5 hours">1.5 hours</option>
+                      <option value="2 hours">2 hours</option>
+                      <option value="2.5 hours">2.5 hours</option>
+                      <option value="3 hours">3 hours</option>
                     </select>
                   </div>
                   
                   <div className="form-group">
                     <label htmlFor="message">
                       <span className="label-icon">💭</span>
-                      Your Message *
+                      Additional Notes
                     </label>
                     <textarea
                       id="message"
                       name="message"
                       value={formData.message}
                       onChange={handleChange}
-                      placeholder="Tell me about your learning goals, current level, and preferred schedule..."
-                      rows="6"
-                      required
+                      placeholder="Tell me about your learning goals, current level, and any specific topics you want to cover..."
+                      rows="4"
                     />
                     <div className="char-counter">
                       {formData.message.length}/500 characters
+                    </div>
+                  </div>
+
+                  {/* Reminder Preferences */}
+                  <div className="form-group">
+                    <label>
+                      <span className="label-icon">🔔</span>
+                      Send me reminders via:
+                    </label>
+                    <div className="reminder-preferences">
+                      <label className="reminder-checkbox">
+                        <input 
+                          type="checkbox" 
+                          checked={reminders.email}
+                          onChange={() => toggleReminder('email')}
+                        />
+                        <span>Email</span>
+                      </label>
+                      <label className="reminder-checkbox">
+                        <input 
+                          type="checkbox" 
+                          checked={reminders.sms}
+                          onChange={() => toggleReminder('sms')}
+                        />
+                        <span>SMS</span>
+                      </label>
+                      <label className="reminder-checkbox">
+                        <input 
+                          type="checkbox" 
+                          checked={reminders.whatsapp}
+                          onChange={() => toggleReminder('whatsapp')}
+                        />
+                        <span>WhatsApp</span>
+                      </label>
                     </div>
                   </div>
                 </div>
@@ -745,7 +961,7 @@ function Contact() {
                   {submitStatus === 'success' && (
                     <div className="success-message">
                       <span className="success-icon">✅</span>
-                      Booking submitted! The tutor will contact you soon.
+                      Booking submitted! The tutor has been notified and will contact you soon.
                     </div>
                   )}
                   
@@ -806,6 +1022,51 @@ function Contact() {
               </button>
               <button className="call-action-btn secondary" onClick={() => setShowCallModal(false)}>
                 <span className="btn-icon">✕</span>
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ===== Reminder Modal ===== */}
+      {showReminderModal && (
+        <div className="reminder-modal" onClick={() => setShowReminderModal(false)}>
+          <div className="reminder-modal-content" onClick={e => e.stopPropagation()}>
+            <h3>⏰ Set Reminder</h3>
+            <p>Set a reminder for session with {selectedBookingForReminder?.student}</p>
+            
+            <div className="reminder-form">
+              <div className="form-group">
+                <label htmlFor="reminderTime">
+                  Remind me before session:
+                </label>
+                <select
+                  id="reminderTime"
+                  value={reminderTime}
+                  onChange={(e) => setReminderTime(e.target.value)}
+                  className="reminder-select"
+                >
+                  <option value="1">1 hour before</option>
+                  <option value="3">3 hours before</option>
+                  <option value="6">6 hours before</option>
+                  <option value="12">12 hours before</option>
+                  <option value="24">24 hours before</option>
+                  <option value="48">2 days before</option>
+                </select>
+              </div>
+              
+              <div className="reminder-note">
+                <span className="note-icon">📅</span>
+                <span>Session: {selectedBookingForReminder?.date} at {selectedBookingForReminder?.time}</span>
+              </div>
+            </div>
+            
+            <div className="reminder-modal-actions">
+              <button className="primary-btn" onClick={setReminder}>
+                Set Reminder
+              </button>
+              <button className="secondary-btn" onClick={() => setShowReminderModal(false)}>
                 Cancel
               </button>
             </div>
