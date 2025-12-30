@@ -38,7 +38,56 @@ function Contact() {
     before1h: true
   });
 
-  // ========== PASSWORD CHECK FUNCTION ==========
+  // ========== NEW COPY STATES ========== 👈 ADD HERE
+  const [copiedNumber, setCopiedNumber] = useState(false);
+  const [copiedEmail, setCopiedEmail] = useState(false);
+  const [showCopyToast, setShowCopyToast] = useState(false);
+  const [copyMessage, setCopyMessage] = useState('');
+
+  // ========== COPY TO CLIPBOARD FUNCTION ========== 👈 ADD HERE
+  const copyToClipboard = (text, message) => {
+    navigator.clipboard.writeText(text)
+      .then(() => {
+        setCopyMessage(message);
+        setShowCopyToast(true);
+        setTimeout(() => setShowCopyToast(false), 3000);
+      })
+      .catch(err => {
+        console.error('Failed to copy: ', err);
+        alert('Failed to copy. Please copy manually: ' + text);
+      });
+  };
+
+  // ========== DIRECT COMMUNICATION HANDLERS ========== 👈 ADD HERE
+  const handleWhatsApp = () => {
+    const message = encodeURIComponent('Hi Dickson! I saw your MathMasters website and need help with mathematics.');
+    window.open(`https://wa.me/260779414131?text=${message}`, '_blank');
+  };
+
+  const handleDirectCall = () => {
+    // On mobile, this will dial. On desktop, show copy option
+    if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      window.location.href = 'tel:+260779414131';
+    } else {
+      copyToClipboard('+260779414131', 'Phone number copied! Call this number from your phone.');
+    }
+  };
+
+  const handleDirectSMS = () => {
+    const message = 'Hi Dickson! I would like to book a tutoring session.';
+    // On mobile, open SMS app. On desktop, copy number.
+    if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      window.location.href = `sms:+260779414131?body=${encodeURIComponent(message)}`;
+    } else {
+      copyToClipboard('+260779414131', 'Phone number copied! Send SMS from your phone.');
+    }
+  };
+
+  const handleDirectEmail = () => {
+    window.open(`mailto:chishimbadickson2000@gmail.com?subject=MathMasters%20Tutoring%20Inquiry&body=Hi%20Dickson,%0A%0AI%20need%20help%20with...`, '_blank');
+  };
+
+  // ========== PASSWORD CHECK FUNCTION ========== 
   const checkPassword = () => {
     if (password === 'tutor123') {
       setIsAuthenticated(true);
@@ -50,13 +99,14 @@ function Contact() {
     }
   };
 
-  // Contact methods with actual contact info
+// ENDING HERE
+  // Contact methods with YOUR ACTUAL contact info
   const contactMethods = [
     {
       id: 1,
       icon: '📞',
       title: 'Call Me',
-      details: '+260 977 123 456',
+      details: '+260 779 414 131',
       description: 'Available 8 AM - 8 PM, Monday to Saturday',
       action: 'Call Now',
       color: '#3B82F6',
@@ -66,7 +116,7 @@ function Contact() {
       id: 2,
       icon: '✉️',
       title: 'Email Me',
-      details: 'tutor@example.com',
+      details: 'chishimbadickson2000@gmail.com',
       description: 'Response within 24 hours guaranteed',
       action: 'Send Email',
       color: '#10B981',
@@ -76,7 +126,7 @@ function Contact() {
       id: 3,
       icon: '💬',
       title: 'WhatsApp',
-      details: '+260 977 123 456',
+      details: '+260 779 414 131',
       description: 'Quick response, ideal for quick questions',
       action: 'Open WhatsApp',
       color: '#25D366',
@@ -99,7 +149,7 @@ function Contact() {
     {
       id: 1,
       student: 'John Mwale',
-      subject: 'Mathematics',
+      subject: 'Calculus',
       date: '15 Dec 2024',
       time: '10:00 AM',
       duration: '2 hours',
@@ -115,16 +165,16 @@ function Contact() {
     {
       id: 2,
       student: 'Sarah Banda',
-      subject: 'Physics',
+      subject: 'Statistics',
       date: '16 Dec 2024',
       time: '2:00 PM',
       duration: '1.5 hours',
       status: 'pending',
-      contact: '+260 977 654 321',
+      contact: '+260977654321',
       email: 'sarah.banda@email.com',
       phone: '+260 977 654 321',
-      level: 'High School',
-      topics: 'Mechanics, Thermodynamics',
+      level: 'University',
+      topics: 'Hypothesis Testing, Probability',
       notes: 'Exam preparation for finals',
       createdAt: '12 Dec 2024'
     }
@@ -164,46 +214,31 @@ function Contact() {
     }));
   };
 
-  // Simulate sending notifications
+  // Simulate sending notifications to YOUR EMAIL
   const sendTutorNotification = (booking) => {
-    // In production, this would call your backend API
-    console.log('📧 Email sent to tutor:', {
-      to: 'tutor@example.com',
-      subject: `New Booking: ${booking.student} - ${booking.subject}`,
+    // This would actually email you via Formspree
+    console.log('📧 Email notification sent to:', 'chishimbadickson2000@gmail.com', {
+      subject: `📚 New Booking: ${booking.student} - ${booking.subject}`,
       body: `
         New booking received!
         
-        Student: ${booking.student}
-        Email: ${booking.email}
-        Phone: ${booking.phone}
-        Subject: ${booking.subject}
-        Date: ${booking.date}
-        Time: ${booking.time}
-        Duration: ${booking.duration}
+        👤 Student: ${booking.student}
+        📧 Email: ${booking.email}
+        📱 Phone: ${booking.phone}
+        📖 Subject: ${booking.subject}
+        📅 Date: ${booking.date}
+        ⏰ Time: ${booking.time}
+        ⏱️ Duration: ${booking.duration}
         
-        Notes: ${booking.notes}
+        📝 Notes: ${booking.notes}
         
         Please check your dashboard for details.
       `
     });
 
-    // Simulate SMS to tutor
-    console.log('📱 SMS sent to tutor:', `+260977123456`, 
+    // SMS notification
+    console.log('📱 SMS notification would be sent to:', '+260779414131', 
       `New booking: ${booking.student} for ${booking.subject} on ${booking.date} at ${booking.time}`);
-
-    // Simulate WhatsApp to tutor
-    const whatsappMessage = encodeURIComponent(
-      `📚 *New Booking Notification*\n\n` +
-      `👤 *Student:* ${booking.student}\n` +
-      `📧 *Email:* ${booking.email}\n` +
-      `📱 *Phone:* ${booking.phone}\n` +
-      `📖 *Subject:* ${booking.subject}\n` +
-      `📅 *Date:* ${booking.date}\n` +
-      `⏰ *Time:* ${booking.time}\n` +
-      `⏱️ *Duration:* ${booking.duration}\n\n` +
-      `Check dashboard for details.`
-    );
-    console.log('💬 WhatsApp notification would be sent to tutor');
   };
 
   // Send confirmation to student
@@ -214,7 +249,7 @@ function Contact() {
     
     if (viaSMS && reminders.sms && booking.phone) {
       console.log('📱 Confirmation SMS sent to student:', booking.phone,
-        `Your ${booking.subject} session is confirmed for ${booking.date} at ${booking.time}.`);
+        `Your ${booking.subject} session with MathMasters is confirmed for ${booking.date} at ${booking.time}.`);
     }
     
     if (reminders.whatsapp && booking.phone) {
@@ -225,96 +260,113 @@ function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    // Create a new booking
-    const newBooking = {
-      id: bookings.length + 1,
-      student: formData.name,
-      subject: formData.subject || 'General Inquiry',
-      date: formData.preferredDate || new Date().toLocaleDateString('en-US', { 
-        weekday: 'short', 
-        year: 'numeric', 
-        month: 'short', 
-        day: 'numeric' 
-      }),
-      time: formData.preferredTime || new Date().toLocaleTimeString('en-US', { 
-        hour: '2-digit', 
-        minute: '2-digit' 
-      }),
-      duration: formData.duration,
-      status: 'pending',
-      contact: formData.email,
-      email: formData.email,
-      phone: formData.phone,
-      level: 'Not specified',
-      topics: formData.subject,
-      notes: formData.message || 'No additional notes',
-      createdAt: new Date().toLocaleDateString('en-US')
-    };
-    
-    setBookings(prev => [newBooking, ...prev]);
-    
-    // Send notifications to tutor
-    sendTutorNotification(newBooking);
-    
-    setSubmitStatus('success');
-    setFormData({ 
-      name: '', 
-      email: '', 
-      phone: '',
-      subject: '', 
-      message: '',
-      preferredDate: '',
-      preferredTime: '',
-      duration: '1 hour'
-    });
-    
-    setTimeout(() => setSubmitStatus(''), 5000);
-    setIsSubmitting(false);
-  };
+    setSubmitStatus('sending');
 
-  // Handle direct communication actions
-  const handleContactAction = (method) => {
-    switch(method.title) {
-      case 'Call Me':
-        setShowCallModal(true);
-        break;
-      case 'Email Me':
-        window.open(`mailto:${method.details}?subject=Tutoring Inquiry&body=Hello! I would like to inquire about tutoring sessions.`, '_blank');
-        break;
-      case 'WhatsApp':
-        const whatsappMessage = encodeURIComponent('Hello! I would like to inquire about tutoring sessions.');
-        const phoneNumber = method.details.replace(/\D/g, '');
-        window.open(`https://wa.me/${phoneNumber}?text=${whatsappMessage}`, '_blank');
-        break;
-      case 'Location':
-        window.open(`https://maps.google.com/?q=${encodeURIComponent(method.details)}`, '_blank');
-        break;
-      default:
-        break;
+    // YOUR ACTUAL FORMSPREE ENDPOINT
+    const formspreeEndpoint = "https://formspree.io/f/mkonagwl";
+    
+    try {
+      const response = await fetch(formspreeEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          subject: formData.subject,
+          preferredDate: formData.preferredDate,
+          preferredTime: formData.preferredTime,
+          duration: formData.duration,
+          message: formData.message,
+          _replyto: formData.email,
+          _subject: `📚 MathMasters Booking: ${formData.subject}`,
+          _template: 'table'
+        }),
+      });
+
+      if (response.ok) {
+        // Create a new booking for dashboard display
+        const newBooking = {
+          id: bookings.length + 1,
+          student: formData.name,
+          subject: formData.subject || 'General Inquiry',
+          date: formData.preferredDate || new Date().toLocaleDateString('en-US', { 
+            weekday: 'short', 
+            year: 'numeric', 
+            month: 'short', 
+            day: 'numeric' 
+          }),
+          time: formData.preferredTime || new Date().toLocaleTimeString('en-US', { 
+            hour: '2-digit', 
+            minute: '2-digit' 
+          }),
+          duration: formData.duration,
+          status: 'pending',
+          contact: formData.email,
+          email: formData.email,
+          phone: formData.phone,
+          level: 'University',
+          topics: formData.subject,
+          notes: formData.message || 'No additional notes',
+          createdAt: new Date().toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+          })
+        };
+        
+        setBookings(prev => [newBooking, ...prev]);
+        
+        // Send notification to tutor (YOU)
+        sendTutorNotification(newBooking);
+        
+        setSubmitStatus('success');
+        setFormData({ 
+          name: '', 
+          email: '', 
+          phone: '',
+          subject: '', 
+          message: '',
+          preferredDate: '',  // ✅ CORRECTED: No space
+          preferredTime: '',  // ✅ CORRECTED: No space
+          duration: '1 hour'
+        });
+        
+        setTimeout(() => setSubmitStatus(''), 5000);
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
-  // Direct communication handlers
-  const handleWhatsApp = () => {
-    const message = encodeURIComponent('Hello! I would like to book a tutoring session.');
-    window.open(`https://wa.me/260977123456?text=${message}`, '_blank');
-  };
-
-  const handleDirectCall = () => {
-    window.location.href = 'tel:+260977123456';
-  };
-
-  const handleDirectEmail = () => {
-    window.open(`mailto:tutor@example.com?subject=Tutoring Inquiry&body=Hello! I would like to inquire about tutoring sessions.`, '_blank');
-  };
-
-  const handleDirectSMS = () => {
-    window.location.href = 'sms:+260977123456?body=Hello! I would like to book a tutoring session.';
-  };
+  // Handle direct communication actions
+ // Handle direct communication actions
+const handleContactAction = (method) => {
+  switch(method.title) {
+    case 'Call Me':
+      setShowCallModal(true);
+      break;
+    case 'Email Me':
+      handleDirectEmail(); // Use the new handler
+      break;
+    case 'WhatsApp':
+      handleWhatsApp(); // Use the new handler
+      break;
+    case 'Location':
+      window.open(`https://maps.google.com/?q=${encodeURIComponent('Lusaka, Zambia')}`, '_blank');
+      break;
+    default:
+      break;
+  }
+};
+ 
 
   // Booking management functions
   const confirmBooking = (bookingId) => {
@@ -363,7 +415,7 @@ function Contact() {
       // Simulate setting a reminder
       setTimeout(() => {
         alert(`🔔 Reminder: Your session with ${selectedBookingForReminder.student} starts in ${reminderTime} hours!`);
-      }, 2000); // Simulated delay
+      }, 2000);
       
       setShowReminderModal(false);
       setReminderTime('24');
@@ -383,7 +435,7 @@ function Contact() {
   const exportBookings = () => {
     const dataStr = JSON.stringify(bookings, null, 2);
     const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
-    const exportFileDefaultName = `tutor-bookings-${new Date().toISOString().split('T')[0]}.json`;
+    const exportFileDefaultName = `mathmasters-bookings-${new Date().toISOString().split('T')[0]}.json`;
     
     const linkElement = document.createElement('a');
     linkElement.setAttribute('href', dataUri);
@@ -408,32 +460,31 @@ function Contact() {
         <div className="contact-header">
           <div className="contact-badge">
             <span className="badge-icon">✨</span>
-            <span className="badge-text">Get in Touch</span>
+            <span className="badge-text">Contact MathMasters</span>
           </div>
           
           <h2 className="contact-title">
             Let's Start Your 
-            <span className="title-highlight"> Learning Journey</span>
+            <span className="title-highlight"> Mathematics Journey</span>
           </h2>
           
           <p className="contact-subtitle">
-            Have questions? Ready to transform your mathematics skills? 
-            Reach out today for personalized academic support.
+            Need help with university mathematics? Contact Dickson Chishimba for expert tutoring in calculus, statistics, linear algebra, and more.
           </p>
 
           {/* Stats Bar */}
           <div className="contact-stats">
             <div className="contact-stat">
-              <div className="stat-number">24h</div>
-              <div className="stat-label">Response Time</div>
+              <div className="stat-number">6h</div>
+              <div className="stat-label">Avg. Response Time</div>
             </div>
             <div className="contact-stat">
-              <div className="stat-number">100%</div>
-              <div className="stat-label">Free Consultation</div>
+              <div className="stat-number">Free</div>
+              <div className="stat-label">30-min Consultation</div>
             </div>
             <div className="contact-stat">
-              <div className="stat-number">95%</div>
-              <div className="stat-label">Satisfaction Rate</div>
+              <div className="stat-number">MSc</div>
+              <div className="stat-label">Mathematics Expert</div>
             </div>
           </div>
         </div>
@@ -443,7 +494,7 @@ function Contact() {
           {isAuthenticated ? (
             <>
               <div className="tutor-status">
-                ✅ Tutor Mode Active - You can view and manage bookings
+                ✅ Tutor Mode Active - Viewing as Dickson Chishimba
               </div>
               <div className="dashboard-toggle">
                 <span className="toggle-label">View Mode:</span>
@@ -460,6 +511,12 @@ function Contact() {
                     </div>
                   </span>
                 </label>
+                <button 
+                  className="export-btn"
+                  onClick={exportBookings}
+                >
+                  📥 Export Bookings
+                </button>
                 <button 
                   className="logout-btn"
                   onClick={() => {
@@ -478,55 +535,100 @@ function Contact() {
                 className="login-btn"
                 onClick={() => setShowPasswordModal(true)}
               >
-                🔒 Tutor Login
+                🔒 Tutor Login (Password: tutor123)
               </button>
             </div>
           )}
         </div>
 
         {/* ===== Direct Communication Section ===== */}
-        <div className="direct-comms-section">
-          <h3 className="section-title">
-            {isTutorView ? 'Student Communication' : 'Connect Directly'}
-          </h3>
-          <div className="comm-methods">
-            <div className="comm-card whatsapp" onClick={handleWhatsApp}>
-              <div className="comm-icon">💬</div>
-              <h4>WhatsApp</h4>
-              <p>{isTutorView ? 'Message students directly' : 'Instant messaging with quick responses'}</p>
-              <button className="comm-btn">
-                {isTutorView ? 'Open WhatsApp' : 'Message Now'}
-              </button>
-            </div>
-            
-            <div className="comm-card call" onClick={() => setShowCallModal(true)}>
-              <div className="comm-icon">📞</div>
-              <h4>Direct Call</h4>
-              <p>{isTutorView ? 'Call students directly' : 'Call directly for immediate assistance'}</p>
-              <button className="comm-btn">Call Now</button>
-            </div>
-            
-            <div className="comm-card message" onClick={handleDirectSMS}>
-              <div className="comm-icon">✉️</div>
-              <h4>SMS/Text</h4>
-              <p>{isTutorView ? 'Send SMS to students' : 'Send a quick text message'}</p>
-              <button className="comm-btn">Send SMS</button>
-            </div>
-            
-            <div className="comm-card email" onClick={handleDirectEmail}>
-              <div className="comm-icon">📧</div>
-              <h4>Email</h4>
-              <p>{isTutorView ? 'Email students directly' : 'Send detailed queries via email'}</p>
-              <button className="comm-btn">Send Email</button>
-            </div>
-          </div>
-        </div>
+        {/* ===== Direct Communication Section ===== */}
+<div className="direct-comms-section">
+  <h3 className="section-title">
+    {isTutorView ? 'Student Communication' : 'Connect Directly with Dickson'}
+  </h3>
+  <div className="comm-methods">
+    <div className="comm-card whatsapp" onClick={handleWhatsApp}>
+      <div className="comm-icon">💬</div>
+      <h4>WhatsApp</h4>
+      <p>{isTutorView ? 'Message students directly' : 'Instant messaging with Dickson'}</p>
+      <button className="comm-btn">
+        {isTutorView ? 'Open WhatsApp' : 'Message Dickson'}
+      </button>
+      <div className="copy-option" onClick={(e) => {
+        e.stopPropagation();
+        copyToClipboard('+260779414131', 'WhatsApp number copied!');
+      }}>
+        📋 Copy Number
+      </div>
+    </div>
+    
+    <div className="comm-card call" onClick={handleDirectCall}>
+      <div className="comm-icon">📞</div>
+      <h4>Direct Call</h4>
+      <p>{isTutorView ? 'Call students directly' : 'Call Dickson directly'}</p>
+      <button className="comm-btn">
+        {/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) 
+          ? 'Call Now' 
+          : 'Copy Number'}
+      </button>
+      <div className="phone-display">+260 779 414 131</div>
+    </div>
+    
+    <div className="comm-card message" onClick={handleDirectSMS}>
+      <div className="comm-icon">✉️</div>
+      <h4>SMS/Text</h4>
+      <p>{isTutorView ? 'Send SMS to students' : 'Send SMS to Dickson'}</p>
+      <button className="comm-btn">
+        {/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) 
+          ? 'Send SMS' 
+          : 'Copy Number'}
+      </button>
+      <div className="copy-option" onClick={(e) => {
+        e.stopPropagation();
+        copyToClipboard('+260779414131', 'SMS number copied!');
+      }}>
+        📋 Copy for SMS
+      </div>
+    </div>
+    
+    <div className="comm-card email" onClick={handleDirectEmail}>
+      <div className="comm-icon">📧</div>
+      <h4>Email</h4>
+      <p>{isTutorView ? 'Email students directly' : 'Email Dickson directly'}</p>
+      <button className="comm-btn">Send Email</button>
+      <div className="copy-option" onClick={(e) => {
+        e.stopPropagation();
+        copyToClipboard('chishimbadickson2000@gmail.com', 'Email copied!');
+      }}>
+        📋 Copy Email
+      </div>
+    </div>
+  </div>
 
+  {/* Copy Success Toast */}
+  {showCopyToast && (
+    <div className="copy-toast">
+      ✅ {copyMessage}
+    </div>
+  )}
+
+  {/* Desktop Instructions */}
+  {!isTutorView && !/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) && (
+    <div className="desktop-instructions">
+      <div className="instruction-icon">💡</div>
+      <div className="instruction-text">
+        <strong>On Desktop:</strong> Phone/SMS links will copy the number to clipboard. 
+        Use your phone to call/text. WhatsApp Web will open directly.
+      </div>
+    </div>
+  )}
+</div>
         {/* ===== Bookings Dashboard (Only visible in tutor view) ===== */}
         {isTutorView && (
           <div className="bookings-section">
             <div className="bookings-header">
-              <h3>📅 Tutor Dashboard - Your Bookings</h3>
+              <h3>📅 MathMasters Dashboard - Bookings Management</h3>
               <div className="booking-filters">
                 <button 
                   className={`filter-btn ${filter === 'all' ? 'active' : ''}`}
@@ -576,6 +678,13 @@ function Contact() {
                         <span className="meta-icon">📱</span>
                         <span>{booking.phone}</span>
                       </div>
+                      <div className="meta-item">
+                        <span className="meta-icon">📧</span>
+                        <span>{booking.email}</span>
+                      </div>
+                    </div>
+                    <div className="booking-notes">
+                      <strong>Notes:</strong> {booking.notes}
                     </div>
                     <div className="booking-actions">
                       <button 
@@ -592,23 +701,42 @@ function Contact() {
                         Set Reminder
                       </button>
                       <button 
-                        className="action-btn primary"
+                        className="action-btn success"
                         onClick={() => confirmBooking(booking.id)}
                         disabled={booking.status === 'confirmed' || booking.status === 'cancelled'}
                       >
-                        Confirm
+                        ✅ Confirm
                       </button>
                       <button 
-                        className="action-btn secondary"
+                        className="action-btn danger"
                         onClick={() => cancelBooking(booking.id)}
                         disabled={booking.status === 'cancelled'}
                       >
-                        Cancel
+                        ❌ Cancel
                       </button>
                     </div>
                   </div>
                 </div>
               ))}
+            </div>
+            
+            <div className="dashboard-stats">
+              <div className="stat-card">
+                <div className="stat-number">{dashboardStats.total}</div>
+                <div className="stat-label">Total Bookings</div>
+              </div>
+              <div className="stat-card">
+                <div className="stat-number">{dashboardStats.confirmed}</div>
+                <div className="stat-label">Confirmed</div>
+              </div>
+              <div className="stat-card">
+                <div className="stat-number">{dashboardStats.pending}</div>
+                <div className="stat-label">Pending</div>
+              </div>
+              <div className="stat-card">
+                <div className="stat-number">{dashboardStats.cancelled}</div>
+                <div className="stat-label">Cancelled</div>
+              </div>
             </div>
           </div>
         )}
@@ -618,7 +746,7 @@ function Contact() {
           {/* Left Column - Contact Methods */}
           <div className="contact-methods">
             <h3 className="section-title">
-              {isTutorView ? 'Contact Information' : 'Quick Contact Options'}
+              {isTutorView ? 'Your Contact Information' : 'Contact Dickson Chishimba'}
             </h3>
             
             {/* Featured Contact Method */}
@@ -685,7 +813,7 @@ function Contact() {
             <div className="hours-card">
               <div className="hours-header">
                 <div className="hours-icon">⏰</div>
-                <h4>Working Hours</h4>
+                <h4>Available Hours</h4>
               </div>
               <div className="hours-schedule">
                 <div className="hours-day">
@@ -698,8 +826,12 @@ function Contact() {
                 </div>
                 <div className="hours-day">
                   <span className="day">Sunday</span>
-                  <span className="time">By Appointment</span>
+                  <span className="time">By Appointment Only</span>
                 </div>
+              </div>
+              <div className="hours-note">
+                <span className="note-icon">📍</span>
+                <span>Based in Lusaka, Zambia | Online sessions worldwide</span>
               </div>
             </div>
           </div>
@@ -708,12 +840,12 @@ function Contact() {
           <div className="contact-form-section">
             <div className="form-header">
               <h3 className="section-title">
-                {isTutorView ? 'New Booking Notification' : 'Book a Session'}
+                {isTutorView ? 'Student Booking Form' : 'Book a Mathematics Session'}
               </h3>
               <p className="form-subtitle">
                 {isTutorView 
-                  ? 'When students book sessions, they will appear in your dashboard above.'
-                  : 'Fill out the form below to book a tutoring session. You\'ll receive automated reminders based on your preferences.'
+                  ? 'Students use this form to book sessions. Submissions appear in your dashboard.'
+                  : 'Fill this form to schedule a tutoring session. All submissions are sent to Dickson\'s email.'
                 }
               </p>
             </div>
@@ -723,13 +855,7 @@ function Contact() {
               <form 
                 className="contact-form" 
                 onSubmit={handleSubmit}
-                name="contact"
-                method="POST"
-                data-netlify="true"
-                netlify
               >
-                <input type="hidden" name="form-name" value="contact" />
-
                 {/* Form Steps Indicator */}
                 <div className="form-steps">
                   <div className="step active">1</div>
@@ -787,7 +913,7 @@ function Contact() {
                         name="phone"
                         value={formData.phone}
                         onChange={handleChange}
-                        placeholder="+260 977 123 456"
+                        placeholder="+260 779 414 131"
                         required
                       />
                     </div>
@@ -795,7 +921,7 @@ function Contact() {
                     <div className="form-group">
                       <label htmlFor="subject">
                         <span className="label-icon">📚</span>
-                        Subject *
+                        Subject Needed *
                       </label>
                       <select
                         id="subject"
@@ -805,14 +931,21 @@ function Contact() {
                         required
                       >
                         <option value="">Select a subject</option>
-                        <option value="Mathematics Tutoring">Mathematics Tutoring</option>
-                        <option value="Statistics Help">Statistics Help</option>
-                        <option value="Calculus Assistance">Calculus Assistance</option>
-                        <option value="Thesis Writing">Thesis Writing</option>
-                        <option value="Research Paper Help">Research Paper Help</option>
-                        <option value="Civic Education">Civic Education</option>
+                        <option value="Calculus & Analysis">Calculus & Analysis</option>
+                        <option value="Linear Algebra">Linear Algebra</option>
+                        <option value="Statistics & Probability">Statistics & Probability</option>
+                        <option value="Differential Equations">Differential Equations</option>
+                        <option value="Discrete Mathematics">Discrete Mathematics</option>
+                        <option value="Numerical Methods">Numerical Methods</option>
+                        <option value="Real Analysis">Real Analysis</option>
+                        <option value="Complex Analysis">Complex Analysis</option>
+                        <option value="Abstract Algebra">Abstract Algebra</option>
+                        <option value="Topology">Topology</option>
+                        <option value="Mathematical Physics">Mathematical Physics</option>
+                        <option value="Thesis/Research Help">Thesis/Research Help</option>
                         <option value="Exam Preparation">Exam Preparation</option>
-                        <option value="Other Inquiry">Other Inquiry</option>
+                        <option value="Assignment Help">Assignment Help</option>
+                        <option value="Other Mathematics">Other Mathematics</option>
                       </select>
                     </div>
                   </div>
@@ -844,7 +977,7 @@ function Contact() {
                         value={formData.preferredTime}
                         onChange={handleChange}
                       >
-                        <option value="">Select time</option>
+                        <option value="">Select preferred time</option>
                         <option value="08:00 AM">08:00 AM</option>
                         <option value="09:00 AM">09:00 AM</option>
                         <option value="10:00 AM">10:00 AM</option>
@@ -883,15 +1016,20 @@ function Contact() {
                   <div className="form-group">
                     <label htmlFor="message">
                       <span className="label-icon">💭</span>
-                      Additional Notes
+                      Additional Notes & Learning Goals
                     </label>
                     <textarea
                       id="message"
                       name="message"
                       value={formData.message}
                       onChange={handleChange}
-                      placeholder="Tell me about your learning goals, current level, and any specific topics you want to cover..."
-                      rows="4"
+                      placeholder="Tell me about:
+• Your current university/course level
+• Specific topics you need help with
+• Your goals (exam prep, assignment, understanding concepts)
+• Any deadlines or urgent requirements
+• Preferred learning style"
+                      rows="5"
                     />
                     <div className="char-counter">
                       {formData.message.length}/500 characters
@@ -937,7 +1075,7 @@ function Contact() {
                 <div className="form-footer">
                   <div className="privacy-note">
                     <span className="privacy-icon">🔒</span>
-                    Your information is secure and will never be shared
+                    Your information is secure. Form submissions are sent directly to Dickson's email.
                   </div>
                   
                   <button 
@@ -948,12 +1086,12 @@ function Contact() {
                     {isSubmitting ? (
                       <>
                         <span className="spinner"></span>
-                        Booking Session...
+                        Sending to Dickson...
                       </>
                     ) : (
                       <>
-                        <span className="btn-icon">📅</span>
-                        Book Your Session
+                        <span className="btn-icon">📤</span>
+                        Send Booking Request
                       </>
                     )}
                   </button>
@@ -961,28 +1099,46 @@ function Contact() {
                   {submitStatus === 'success' && (
                     <div className="success-message">
                       <span className="success-icon">✅</span>
-                      Booking submitted! The tutor has been notified and will contact you soon.
+                      <div>
+                        <strong>Booking Submitted Successfully!</strong>
+                        <p>Your request has been sent to Dickson's email. You'll receive a response within 6 hours.</p>
+                        <p className="success-tip"><strong>Tip:</strong> Save Dickson's WhatsApp number (+260779414131) for faster communication.</p>
+                      </div>
                     </div>
                   )}
                   
                   {submitStatus === 'error' && (
                     <div className="error-message">
                       <span className="error-icon">❌</span>
-                      Something went wrong. Please try again or contact me directly.
+                      <div>
+                        <strong>Submission Error</strong>
+                        <p>Please contact Dickson directly:</p>
+                        <div className="direct-contact">
+                          <button onClick={handleWhatsApp} className="whatsapp-btn">💬 WhatsApp</button>
+                          <button onClick={handleDirectEmail} className="email-btn">✉️ Email</button>
+                          <button onClick={() => setShowCallModal(true)} className="call-btn">📞 Call</button>
+                        </div>
+                      </div>
                     </div>
                   )}
                 </div>
               </form>
             )}
 
-            {/* In Tutor View, show booking instructions */}
+            {/* In Tutor View, show booking instructions */} 
             {isTutorView && (
               <div className="response-guarantee">
                 <div className="guarantee-icon">📊</div>
                 <div className="guarantee-content">
                   <h4>Tutor Dashboard Active</h4>
-                  <p>You're viewing the tutor dashboard. Students cannot see this section. 
-                  When they submit the booking form, new bookings will appear here.</p>
+                  <p>You're viewing the tutor dashboard as <strong>Dickson Chishimba</strong>.</p>
+                  <p>When students submit the booking form:</p>
+                  <ul>
+                    <li>✅ They'll receive an auto-confirmation</li>
+                    <li>✅ You'll receive an email to chishimbadickson2000@gmail.com</li>
+                    <li>✅ Booking will appear in your dashboard above</li>
+                    <li>✅ You can confirm/cancel bookings and set reminders</li>
+                  </ul>
                 </div>
               </div>
             )}
@@ -992,16 +1148,16 @@ function Contact() {
         {/* CTA Section */}
         <div className="contact-cta">
           <div className="cta-content">
-            <h3>Need Immediate Assistance?</h3>
-            <p>Call, message, or WhatsApp me directly for the fastest response.</p>
+            <h3>Need Immediate Mathematics Help?</h3>
+            <p>Contact Dickson directly for the fastest response. Available for both online and in-person sessions in Lusaka.</p>
             <div className="cta-buttons">
               <button className="cta-btn primary" onClick={() => setShowCallModal(true)}>
                 <span className="btn-icon">📞</span>
-                Call Now
+                Call Dickson Now
               </button>
               <button className="cta-btn secondary" onClick={handleWhatsApp}>
                 <span className="btn-icon">💬</span>
-                WhatsApp Me
+                WhatsApp Dickson
               </button>
             </div>
           </div>
@@ -1012,8 +1168,8 @@ function Contact() {
       {showCallModal && (
         <div className="call-modal" onClick={() => setShowCallModal(false)}>
           <div className="call-content" onClick={e => e.stopPropagation()}>
-            <h3>Call {isTutorView ? 'Student' : 'Tutor'} Directly</h3>
-            <div className="call-number">+260 977 123 456</div>
+            <h3>Call {isTutorView ? 'Student' : 'Dickson'} Directly</h3>
+            <div className="call-number">+260779414131</div>
             <p>Available: Monday - Saturday, 8:00 AM - 8:00 PM</p>
             <div className="call-options">
               <button className="call-action-btn primary" onClick={handleDirectCall}>
@@ -1025,6 +1181,10 @@ function Contact() {
                 Cancel
               </button>
             </div>
+            <div className="call-note">
+              <span className="note-icon">💡</span>
+              <span>For urgent matters, WhatsApp is recommended for faster response.</span>
+            </div>
           </div>
         </div>
       )}
@@ -1033,7 +1193,7 @@ function Contact() {
       {showReminderModal && (
         <div className="reminder-modal" onClick={() => setShowReminderModal(false)}>
           <div className="reminder-modal-content" onClick={e => e.stopPropagation()}>
-            <h3>⏰ Set Reminder</h3>
+            <h3>⏰ Set Session Reminder</h3>
             <p>Set a reminder for session with {selectedBookingForReminder?.student}</p>
             
             <div className="reminder-form">
@@ -1078,8 +1238,8 @@ function Contact() {
       {showPasswordModal && (
         <div className="password-modal" onClick={() => setShowPasswordModal(false)}>
           <div className="password-modal-content" onClick={e => e.stopPropagation()}>
-            <h3>Tutor Login</h3>
-            <p>Enter your tutor password to access the dashboard:</p>
+            <h3>Tutor Login - MathMasters Dashboard</h3>
+            <p>Enter your tutor password to access the bookings dashboard:</p>
             <input
               type="password"
               value={password}
@@ -1090,21 +1250,22 @@ function Contact() {
             />
             <div className="password-modal-actions">
               <button className="primary-btn" onClick={checkPassword}>
-                Login
+                Login as Tutor
               </button>
               <button className="secondary-btn" onClick={() => setShowPasswordModal(false)}>
                 Cancel
               </button>
             </div>
-            <p className="password-hint">Hint: The password is "tutor123" for this demo</p>
+            <p className="password-hint">Demo password: <code>tutor123</code></p>
           </div>
         </div>
       )}
 
       {/* ===== WhatsApp Widget ===== */}
-      <div className="whatsapp-widget">
-        <div className="whatsapp-btn" onClick={handleWhatsApp}>
+      <div className="whatsapp-widget" onClick={handleWhatsApp}>
+        <div className="whatsapp-btn">
           💬
+          <div className="whatsapp-tooltip">Chat with Dickson on WhatsApp</div>
         </div>
       </div>
     </section>
